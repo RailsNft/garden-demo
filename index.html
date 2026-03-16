@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garden Planner — Free Demo | StudioBoubou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>:root{--primary:#3A6B35;--primary-l:#4A8B45;--primary-d:#2A5025;--primary-deep:#1E3A1B;--sage:#8BA598;--sage-l:#C5D5C0;--sage-p:#E8F0E5;--gold:#B8884E;--gold-l:#D4A86A;--gold-p:#F5ECD8;--cream:#FDFAF6;--cream2:#F5F0E8;--cream3:#EDE7DA;--brown:#4A443C;--brown2:#6B6358;--brown3:#8A8278;--brown4:#B0A898;--red:#C04040;--orange:#D4863A;--sw:230px;--hh:54px;}*{margin:0;padding:0;box-sizing:border-box;}html,body{height:100%;overflow:hidden;}body{font-family:'DM Sans',sans-serif;background:var(--cream2);color:var(--brown);display:flex;}.sidebar{width:var(--sw);flex-shrink:0;background:linear-gradient(185deg,var(--primary-deep) 0%,var(--primary-d) 100%);display:flex;flex-direction:column;overflow:hidden;box-shadow:4px 0 20px rgba(0,0,0,.18);position:relative;z-index:10;}.sidebar::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 38px,rgba(255,255,255,.012) 38px,rgba(255,255,255,.012) 40px);pointer-events:none;}.sb-brand{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.07);position:relative;z-index:1;}.sb-stamp{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:5px;}.sb-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#F8F4EE;line-height:1.15;}.sb-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:var(--sage-l);margin-top:2px;opacity:.8;}.sb-orn{display:flex;align-items:center;gap:6px;margin-top:10px;}.sb-orn-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(184,136,78,.4),transparent);}.sb-orn-gem{width:4px;height:4px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.7;}.sb-nav{flex:1;overflow-y:auto;padding:8px 0;position:relative;z-index:1;}.sb-nav::-webkit-scrollbar{width:3px;}.sb-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}.sb-group{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);padding:14px 18px 4px;opacity:.55;}.sb-item{display:flex;align-items:center;gap:9px;padding:8px 18px;cursor:pointer;color:var(--sage-l);font-size:12.5px;font-weight:400;border-left:2.5px solid transparent;transition:all .15s;position:relative;}.sb-item:hover{background:rgba(255,255,255,.055);color:#F8F4EE;}.sb-item.active{background:rgba(184,136,78,.1);color:#F8F4EE;border-left-color:var(--gold);font-weight:500;}.sb-item.active::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:rgba(184,136,78,.3);border-radius:2px 0 0 2px;}.sb-ico{font-size:14px;width:18px;text-align:center;flex-shrink:0;}.sb-badge{margin-left:auto;background:rgba(184,136,78,.75);color:#F8F4EE;font-size:9px;font-weight:600;padding:1px 6px;border-radius:8px;min-width:16px;text-align:center;}.sb-foot{padding:12px 18px;border-top:1px solid rgba(255,255,255,.06);font-size:9px;color:var(--sage);opacity:.4;letter-spacing:1px;position:relative;z-index:1;}.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}.topbar{height:var(--hh);background:var(--cream);border-bottom:1px solid var(--cream3);padding:0 28px;display:flex;align-items:center;gap:14px;flex-shrink:0;box-shadow:0 1px 8px rgba(60,40,20,.05);}.tb-left{}.tb-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--primary-d);font-weight:700;line-height:1.2;}.tb-sub{font-size:10.5px;color:var(--brown3);letter-spacing:.3px;}.tb-actions{margin-left:auto;display:flex;gap:8px;align-items:center;}.content{flex:1;overflow-y:auto;padding:24px 28px;}.content::-webkit-scrollbar{width:6px;}.content::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:3px;}.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;white-space:nowrap;}.btn-primary{background:var(--primary);color:#F8F4EE;}.btn-primary:hover{background:var(--primary-d);}.btn-ghost{background:transparent;color:var(--brown2);border:1px solid var(--cream3);}.btn-ghost:hover{background:var(--cream2);border-color:var(--brown4);}.btn-gold{background:var(--gold);color:white;}.btn-gold:hover{background:var(--gold-l);}.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(192,64,64,.3);}.btn-danger:hover{background:rgba(192,64,64,.06);}.btn-sm{padding:5px 10px;font-size:11px;}.btn-xs{padding:3px 8px;font-size:10px;}.card{background:var(--cream);border:1px solid var(--cream3);border-radius:10px;box-shadow:0 1px 3px rgba(60,40,20,.05),0 4px 14px rgba(60,40,20,.04);}.card-h{padding:14px 18px;border-bottom:1px solid var(--cream3);display:flex;align-items:center;gap:9px;}.card-title{font-family:'Playfair Display',serif;font-size:14px;color:var(--primary-d);font-weight:600;}.card-b{padding:16px 18px;}.fg{margin-bottom:12px;}.fl{display:block;font-size:10.5px;font-weight:500;color:var(--brown);margin-bottom:4px;letter-spacing:.2px;}.fc{width:100%;padding:7px 10px;border:1px solid var(--cream3);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--brown);background:var(--cream);outline:none;transition:border-color .15s,box-shadow .15s;}.fc:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(139,165,152,.12);}textarea.fc{resize:vertical;min-height:76px;line-height:1.6;}select.fc{cursor:pointer;}.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}.modal-bg{position:fixed;inset:0;background:rgba(30,58,27,.5);backdrop-filter:blur(5px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}.modal-bg.open{display:flex;}.modal{background:var(--cream);border-radius:12px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.28);}.modal::-webkit-scrollbar{width:4px;}.modal::-webkit-scrollbar-thumb{background:var(--cream3);}.modal-h{padding:18px 22px 14px;border-bottom:1px solid var(--cream3);display:flex;align-items:center;gap:8px;position:sticky;top:0;background:var(--cream);z-index:1;}.modal-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--primary-d);font-weight:700;}.modal-x{margin-left:auto;width:26px;height:26px;border-radius:50%;border:1px solid var(--cream3);background:transparent;cursor:pointer;font-size:13px;color:var(--brown3);display:flex;align-items:center;justify-content:center;transition:all .15s;}.modal-x:hover{background:var(--cream2);color:var(--brown);}.modal-b{padding:18px 22px;}.modal-f{padding:12px 22px 18px;display:flex;gap:8px;justify-content:flex-end;border-top:1px solid var(--cream3);background:var(--cream2);}.toast{position:fixed;bottom:22px;right:22px;background:var(--primary-d);color:#F8F4EE;padding:9px 16px;border-radius:8px;font-size:12.5px;z-index:9999;box-shadow:0 4px 18px rgba(0,0,0,.22);animation:toastIn .2s ease;pointer-events:none;}@keyframes toastIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}.stat{background:var(--cream);border:1px solid var(--cream3);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;}.stat::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}.stat.g::after{background:linear-gradient(90deg,var(--primary),var(--primary-l));}.stat.go::after{background:linear-gradient(90deg,var(--gold),var(--gold-l));}.stat.s::after{background:linear-gradient(90deg,var(--sage),var(--sage-l));}.stat.b::after{background:linear-gradient(90deg,var(--brown3),var(--brown4));}.stat-ico{font-size:22px;margin-bottom:6px;}.stat-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--primary-d);}.stat-lbl{font-size:10.5px;color:var(--brown3);margin-top:2px;}.dash-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}.dash-row.wide{grid-template-columns:3fr 2fr;}.garden-wrap{display:grid;grid-template-columns:1fr 210px;gap:18px;align-items:start;}#g-grid{display:inline-grid;gap:2px;background:var(--cream3);padding:2px;border-radius:6px;}.gc{width:42px;height:42px;background:var(--cream2);border-radius:3px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:19px;transition:all .12s;user-select:none;}.gc:hover{transform:scale(1.08);z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.15);}.gc.empty:hover{background:var(--sage-p);}.gc.filled{box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);}.legend-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--brown2);padding:5px 8px;border-radius:6px;cursor:pointer;border:1.5px solid transparent;transition:all .12s;}.legend-item:hover{background:var(--cream2);}.legend-item.sel{background:var(--sage-p);border-color:var(--sage);}.legend-dot{width:14px;height:14px;border-radius:3px;flex-shrink:0;}.cal-wrap{overflow-x:auto;}.cal-table{width:100%;border-collapse:collapse;min-width:680px;}.cal-table th{background:var(--primary-d);color:#F8F4EE;padding:7px 4px;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;}.cal-table th:first-child{text-align:left;padding-left:14px;min-width:118px;}.cal-table td{padding:3px 3px;border-bottom:1px solid var(--cream3);vertical-align:middle;}.cal-table td:first-child{font-size:11.5px;font-weight:500;color:var(--brown);padding:5px 14px;white-space:nowrap;display:table-cell;vertical-align:middle;}.cal-bar-c{height:38px;position:relative;}.cal-bar{height:9px;border-radius:4px;width:100%;}.cal-cur{background:rgba(184,136,78,.1)!important;}.plants-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:13px;}.plant-card{background:var(--cream);border:1px solid var(--cream3);border-radius:10px;padding:16px;cursor:pointer;transition:all .18s;overflow:hidden;position:relative;}.plant-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0;}.plant-card:hover{box-shadow:0 6px 20px rgba(60,40,20,.10);transform:translateY(-2px);}.plant-card.add-card{border:2px dashed var(--cream3);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px;box-shadow:none;}.plant-card.add-card:hover{border-color:var(--sage);background:var(--sage-p);}.pc-emoji{font-size:30px;margin-bottom:8px;}.pc-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--primary-d);margin-bottom:4px;}.pc-meta{font-size:10.5px;color:var(--brown3);line-height:1.65;}.pc-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}.pc-tag{font-size:9px;padding:2px 7px;border-radius:8px;background:var(--sage-p);color:var(--primary-d);font-weight:500;}.log-entry{background:var(--cream);border:1px solid var(--cream3);border-radius:10px;margin-bottom:12px;overflow:hidden;}.log-head{background:var(--primary-d);color:#F8F4EE;padding:9px 16px;font-family:'Playfair Display',serif;font-size:13.5px;display:flex;align-items:center;gap:8px;}.log-body{padding:13px 16px;}.log-note{font-size:11.5px;color:var(--brown2);line-height:1.7;padding:9px 12px;background:var(--cream2);border-radius:6px;border-left:3px solid var(--sage);}.log-task{display:flex;align-items:center;gap:7px;padding:2.5px 0;font-size:11.5px;color:var(--brown2);}.log-task input{accent-color:var(--primary);}.htable{width:100%;border-collapse:collapse;}.htable th{background:var(--primary-d);color:#F8F4EE;padding:7px 11px;font-size:9.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;text-align:left;}.htable td{padding:7px 11px;border-bottom:1px solid var(--cream3);font-size:11.5px;color:var(--brown2);}.htable tr:nth-child(even) td{background:var(--cream2);}.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:18px;}.kpi{background:var(--cream);border:1px solid var(--cream3);border-radius:8px;padding:14px 16px;text-align:center;}.kpi-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}.kpi-lbl{font-size:10px;color:var(--brown3);margin-top:3px;}.tip{background:linear-gradient(135deg,rgba(58,107,53,.065),rgba(139,165,152,.055));border-left:3px solid var(--primary);padding:9px 13px;border-radius:0 6px 6px 0;margin:11px 0;font-size:11.5px;color:var(--brown2);position:relative;overflow:hidden;}.tip::after{content:'';position:absolute;top:0;right:0;width:50px;height:100%;background:linear-gradient(90deg,transparent,rgba(58,107,53,.035));}.tip strong{color:var(--primary-d);font-weight:600;}.empty{text-align:center;padding:52px 20px;color:var(--brown3);}.empty-ico{font-size:44px;opacity:.35;margin-bottom:11px;}.empty-t{font-family:'Playfair Display',serif;font-size:17px;color:var(--brown2);margin-bottom:6px;}.empty-s{font-size:11.5px;line-height:1.65;}.section-head{display:flex;align-items:center;gap:10px;margin-bottom:18px;}.section-head-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--primary-d);font-weight:700;}.cb-wrap{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:11.5px;color:var(--brown2);}.cb-wrap input{display:none;}.cb-box{width:15px;height:15px;border:1.5px solid var(--sage);border-radius:3px;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;font-size:9px;color:transparent;}.cb-wrap input:checked + .cb-box{background:var(--primary);border-color:var(--primary);color:white;}.weather-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:11px;}.wcard{background:var(--cream);border:1px solid var(--cream3);border-radius:8px;padding:13px;text-align:center;}.wdate{font-size:9.5px;color:var(--brown3);margin-bottom:4px;}.wico{font-size:26px;margin-bottom:5px;}.wtemp{font-family:'Playfair Display',serif;font-size:19px;color:var(--primary-d);}.wdesc{font-size:9.5px;color:var(--brown3);margin-top:3px;}.profile-banner{background:linear-gradient(135deg,var(--primary-d),var(--primary));border-radius:10px;padding:26px 28px;color:#F8F4EE;margin-bottom:18px;position:relative;overflow:hidden;}.profile-banner::after{content:'🌿';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:72px;opacity:.1;}.psec{background:var(--cream);border:1px solid var(--cream3);border-radius:10px;margin-bottom:14px;overflow:hidden;}.psec-h{padding:11px 18px;background:var(--cream2);border-bottom:1px solid var(--cream3);font-family:'Playfair Display',serif;font-size:14px;color:var(--primary-d);display:flex;align-items:center;gap:7px;}.psec-b{padding:16px 18px;}.pp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:10px;}.pp-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px;border-radius:7px;border:2px solid transparent;cursor:pointer;transition:all .12s;background:var(--cream2);}.pp-item:hover{background:var(--sage-p);}.pp-item.sel{border-color:var(--primary);background:var(--sage-p);}.pp-emo{font-size:22px;}.pp-name{font-size:9px;color:var(--brown2);text-align:center;line-height:1.2;}.prog-wrap{height:8px;background:var(--cream3);border-radius:4px;overflow:hidden;}.prog-bar{height:100%;border-radius:4px;transition:width .4s ease;}.data-menu{position:relative;display:inline-block;}.data-dropdown{position:absolute;right:0;top:calc(100% + 6px);background:var(--cream);border:1px solid var(--cream3);border-radius:10px;box-shadow:0 8px 28px rgba(60,40,20,.15);padding:8px;min-width:180px;z-index:50;display:none;}.data-dropdown.open{display:block;}.data-dropdown .dd-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;font-size:12px;color:var(--brown);cursor:pointer;transition:background .12s;}.data-dropdown .dd-item:hover{background:var(--cream2);}.data-dropdown .dd-item.danger{color:var(--red);}.data-dropdown .dd-item.danger:hover{background:rgba(192,64,64,.06);}.dd-sep{height:1px;background:var(--cream3);margin:4px 8px;}.mobile-nav{display:none;}@media(max-width:700px){.sidebar{display:none;}body{flex-direction:column;}.main{height:calc(100vh - 56px);}.topbar{padding:0 16px;height:48px;}.tb-title{font-size:15px;}.content{padding:16px;}.stat-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.dash-row,.dash-row.wide{grid-template-columns:1fr;}.garden-wrap{grid-template-columns:1fr;}.fr{grid-template-columns:1fr;}.fr3{grid-template-columns:1fr 1fr;}.kpi-row{grid-template-columns:repeat(3,1fr);gap:8px;}.plants-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--cream);border-top:1px solid var(--cream3);box-shadow:0 -2px 12px rgba(60,40,20,.08);z-index:100;height:56px;justify-content:space-around;align-items:center;padding:0 4px;}.mnav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;border-radius:8px;cursor:pointer;font-size:9px;color:var(--brown3);transition:all .12s;min-width:48px;}.mnav-item:hover,.mnav-item.active{color:var(--primary);background:var(--sage-p);}.mnav-item .mnav-ico{font-size:18px;}}
+/* DEMO BANNER */
+#demo-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999;
+  background: linear-gradient(135deg, #2A5025 0%, #4A8B45 100%);
+  color: #fff; text-align: center; padding: 10px 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px; font-weight: 600;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.3);
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: wrap;
+}
+#demo-banner a {
+  background: #fff; color: #2A5025; padding: 6px 18px; border-radius: 20px;
+  text-decoration: none; font-weight: 700; font-size: 13px;
+  transition: transform .2s;
+}
+#demo-banner a:hover { transform: scale(1.05); }
+#demo-banner .close-btn {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: rgba(255,255,255,.7); font-size: 18px;
+  cursor: pointer; padding: 4px 8px;
+}
+#demo-banner .close-btn:hover { color: #fff; }
+body { padding-bottom: 52px !important; }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-stamp">StudioBoubou</div>
+    <div class="sb-title">Garden<br>Planner</div>
+    <div class="sb-sub">Plan · Grow · Harvest</div>
+    <div class="sb-orn"><div class="sb-orn-line"></div><div class="sb-orn-gem"></div><div class="sb-orn-line" style="transform:scaleX(-1)"></div></div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-group">Overview</div>
+    <div class="sb-item active" onclick="go('dash')"><span class="sb-ico">🏠</span>Dashboard</div>
+    <div class="sb-group">Planning</div>
+    <div class="sb-item" onclick="go('garden')"><span class="sb-ico">🗺️</span>Garden Map</div>
+    <div class="sb-item" onclick="go('plants')"><span class="sb-ico">🌿</span>Plant Profiles<span class="sb-badge" id="bdg-plants">0</span></div>
+    <div class="sb-item" onclick="go('calendar')"><span class="sb-ico">📅</span>Sow Calendar</div>
+    <div class="sb-item" onclick="go('companion')"><span class="sb-ico">🤝</span>Companions</div>
+    <div class="sb-group">Tracking</div>
+    <div class="sb-item" onclick="go('log')"><span class="sb-ico">📓</span>Weekly Journal<span class="sb-badge" id="bdg-log">0</span></div>
+    <div class="sb-item" onclick="go('harvest')"><span class="sb-ico">🥕</span>Harvest Log<span class="sb-badge" id="bdg-harvest">0</span></div>
+    <div class="sb-item" onclick="go('pests')"><span class="sb-ico">🐛</span>Pest & Disease<span class="sb-badge" id="bdg-pests">0</span></div>
+    <div class="sb-group">Admin</div>
+    <div class="sb-item" onclick="go('budget')"><span class="sb-ico">💰</span>Budget</div>
+    <div class="sb-item" onclick="go('weather')"><span class="sb-ico">🌦️</span>Weather Log</div>
+    <div class="sb-item" onclick="go('profile')"><span class="sb-ico">👤</span>My Profile</div>
+  </div>
+  <div class="sb-foot">
+    <div style="display:flex;gap:6px;margin-bottom:6px">
+      <button class="btn btn-ghost btn-xs" onclick="exportData()" style="flex:1;font-size:9px">📤 Export</button>
+      <button class="btn btn-ghost btn-xs" onclick="importData()" style="flex:1;font-size:9px">📥 Import</button>
+    </div>
+    StudioBoubou © 2025
+  </div>
+</nav>
+
+<div class="main">
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-title" id="tb-title">Dashboard</div>
+      <div class="tb-sub" id="tb-sub">Season overview</div>
+    </div>
+    <div class="tb-actions" id="tb-actions"></div>
+    <div class="data-menu">
+      <button class="btn btn-ghost btn-sm" onclick="toggleDataMenu()">⚙️</button>
+      <div class="data-dropdown" id="data-dropdown">
+        <div class="dd-item" onclick="exportData()">📤 Export Data</div>
+        <div class="dd-item" onclick="importData()">📥 Import Data</div>
+        <div class="dd-sep"></div>
+        <div class="dd-item danger" onclick="clearAllData()">🗑️ Clear All Data</div>
+      </div>
+    </div>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+
+<div class="mobile-nav">
+  <div class="mnav-item active" onclick="mgo('dash')"><span class="mnav-ico">🏠</span>Home</div>
+  <div class="mnav-item" onclick="mgo('garden')"><span class="mnav-ico">🗺️</span>Map</div>
+  <div class="mnav-item" onclick="mgo('plants')"><span class="mnav-ico">🌿</span>Plants</div>
+  <div class="mnav-item" onclick="mgo('log')"><span class="mnav-ico">📓</span>Journal</div>
+  <div class="mnav-item" onclick="mgo('harvest')"><span class="mnav-ico">🥕</span>Harvest</div>
+  <div class="mnav-item" onclick="mgo('more')"><span class="mnav-ico">⋯</span>More</div>
+</div>
+
+<div class="modal-bg" id="modal-bg" onclick="mbgClick(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-h">
+      <span id="m-ico"></span>
+      <div class="modal-title" id="m-title"></div>
+      <button class="modal-x" onclick="closeM()">✕</button>
+    </div>
+    <div class="modal-b" id="m-body"></div>
+    <div class="modal-f" id="m-foot"></div>
+  </div>
+</div>
+
+<script>const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const FULL_M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const WICONS=['☀️','🌤️','⛅','🌦️','🌧️','⛈️','🌨️','🌫️','🌪️'];
+const DEFAULT_PLANTS=[
+{id:'p1',name:'Tomato',emoji:'🍅',color:'#FFCDD2',sowS:1,sowE:2,trS:4,trE:5,harS:6,harE:9,spacing:'45cm',water:'High',sun:'Full',days:75,comp:['Basil','Carrot','Parsley'],notes:''},
+{id:'p2',name:'Lettuce',emoji:'🥬',color:'#C8E6C9',sowS:1,sowE:7,trS:2,trE:8,harS:3,harE:9,spacing:'20cm',water:'Med',sun:'Part',days:45,comp:['Carrot','Radish','Strawberry'],notes:''},
+{id:'p3',name:'Carrot',emoji:'🥕',color:'#FFE0B2',sowS:2,sowE:5,trS:-1,trE:-1,harS:5,harE:9,spacing:'7cm',water:'Med',sun:'Full',days:70,comp:['Tomato','Lettuce','Onion'],notes:''},
+{id:'p4',name:'Beans',emoji:'🫘',color:'#BBDEFB',sowS:3,sowE:6,trS:-1,trE:-1,harS:6,harE:9,spacing:'15cm',water:'Med',sun:'Full',days:55,comp:['Carrot','Cucumber','Squash'],notes:''},
+{id:'p5',name:'Cucumber',emoji:'🥒',color:'#E1BEE7',sowS:3,sowE:4,trS:4,trE:5,harS:6,harE:8,spacing:'30cm',water:'High',sun:'Full',days:60,comp:['Beans','Corn','Peas'],notes:''},
+{id:'p6',name:'Pepper',emoji:'🫑',color:'#B2DFDB',sowS:1,sowE:2,trS:4,trE:5,harS:7,harE:9,spacing:'40cm',water:'Med',sun:'Full',days:80,comp:['Basil','Carrot','Tomato'],notes:''},
+{id:'p7',name:'Basil',emoji:'🌿',color:'#D7CCC8',sowS:2,sowE:4,trS:4,trE:5,harS:5,harE:8,spacing:'20cm',water:'Med',sun:'Full',days:30,comp:['Tomato','Pepper'],notes:''},
+{id:'p8',name:'Peas',emoji:'🟢',color:'#DCEDC8',sowS:1,sowE:3,trS:-1,trE:-1,harS:4,harE:6,spacing:'5cm',water:'Med',sun:'Full',days:60,comp:['Carrot','Turnip','Radish'],notes:''},
+{id:'p9',name:'Zucchini',emoji:'🥦',color:'#FFF9C4',sowS:3,sowE:4,trS:4,trE:5,harS:6,harE:8,spacing:'60cm',water:'High',sun:'Full',days:50,comp:['Beans','Corn','Peas'],notes:''},
+{id:'p10',name:'Garlic',emoji:'🧄',color:'#CFD8DC',sowS:8,sowE:10,trS:-1,trE:-1,harS:5,harE:6,spacing:'10cm',water:'Low',sun:'Full',days:240,comp:['Tomato','Pepper','Rose'],notes:''},
+{id:'p11',name:'Onion',emoji:'🧅',color:'#F8BBD0',sowS:0,sowE:2,trS:2,trE:3,harS:6,harE:8,spacing:'10cm',water:'Med',sun:'Full',days:100,comp:['Carrot','Lettuce'],notes:''},
+{id:'p12',name:'Spinach',emoji:'🍃',color:'#B2EBF2',sowS:1,sowE:3,trS:-1,trE:-1,harS:3,harE:5,spacing:'15cm',water:'Med',sun:'Part',days:40,comp:['Strawberry','Peas'],notes:''},
+];
+const COMP_MATRIX={
+'Tomato':{'Basil':'good','Carrot':'good','Parsley':'good','Pepper':'good','Onion':'good','Fennel':'bad','Garlic':'neutral'},
+'Lettuce':{'Carrot':'good','Radish':'good','Basil':'good','Onion':'neutral','Tomato':'neutral','Parsley':'good'},
+'Carrot':{'Tomato':'good','Lettuce':'good','Onion':'good','Peas':'good','Fennel':'bad','Dill':'bad'},
+'Beans':{'Carrot':'good','Cucumber':'good','Peas':'neutral','Onion':'bad','Garlic':'bad','Fennel':'bad'},
+'Cucumber':{'Beans':'good','Corn':'good','Peas':'good','Tomato':'neutral','Basil':'good','Fennel':'bad'},
+'Pepper':{'Basil':'good','Carrot':'good','Tomato':'good','Fennel':'bad','Beans':'neutral'},
+'Basil':{'Tomato':'good','Pepper':'good','Lettuce':'good','Sage':'bad','Fennel':'bad'},
+'Peas':{'Carrot':'good','Beans':'neutral','Onion':'bad','Garlic':'bad','Corn':'good'},
+'Zucchini':{'Beans':'good','Corn':'good','Peas':'good','Potato':'bad'},
+'Garlic':{'Tomato':'good','Pepper':'good','Rose':'good','Beans':'bad','Peas':'bad'},
+'Onion':{'Carrot':'good','Lettuce':'good','Tomato':'good','Beans':'bad','Peas':'bad'},
+'Spinach':{'Peas':'good','Strawberry':'good','Beans':'good'},
+};
+let S={
+section:'dash',
+profile:{name:'',zone:'',location:'',lastFrost:'',firstFrost:'',notes:''},
+garden:{rows:8,cols:10,cells:{}},
+plants:JSON.parse(JSON.stringify(DEFAULT_PLANTS)),
+activePlant:null,
+logs:[],
+harvests:[],
+pests:[],
+budget:{items:[],total:500},
+weather:[],
+};
+function load(){
+try{
+const d=localStorage.getItem('gpState2');
+if(d){
+const p=JSON.parse(d);
+S={...S,...p};
+if(!S.plants||S.plants.length===0) S.plants=JSON.parse(JSON.stringify(DEFAULT_PLANTS));
+if(!S.budget) S.budget={items:[],total:500};
+if(!S.budget.items) S.budget.items=[];
+}
+}catch(e){}
+}
+function save(){
+try{localStorage.setItem('gpState2',JSON.stringify(S));}catch(e){}
+}
+function toast(msg){
+const t=document.createElement('div');
+t.className='toast';t.textContent=msg;
+document.body.appendChild(t);
+setTimeout(()=>t.remove(),2600);
+}
+const CFG={
+dash: {t:'Dashboard',s:'Season overview',a:''},
+garden: {t:'Garden Map',s:'Design your planting layout',a:'<button class="btn btn-ghost btn-sm" onclick="clearGarden()">🗑 Clear All</button>'},
+plants: {t:'Plant Profiles',s:'Your growing library',a:'<button class="btn btn-primary btn-sm" onclick="openAddPlant()">+ Add Plant</button>'},
+calendar:{t:'Sow Calendar',s:'Planting & harvest windows at a glance',a:''},
+companion:{t:'Companion Planting',s:'Which plants grow well together',a:''},
+log: {t:'Weekly Journal',s:'Log your garden activities',a:'<button class="btn btn-primary btn-sm" onclick="openAddLog()">+ New Entry</button>'},
+harvest:{t:'Harvest Log',s:'Track your yields',a:'<button class="btn btn-primary btn-sm" onclick="openAddHarvest()">+ Log Harvest</button>'},
+pests: {t:'Pest & Disease',s:'Observations and treatments',a:'<button class="btn btn-primary btn-sm" onclick="openAddPest()">+ Log Observation</button>'},
+budget: {t:'Budget',s:'Season expenses',a:'<button class="btn btn-primary btn-sm" onclick="openAddExpense()">+ Add Expense</button>'},
+weather:{t:'Weather Log',s:'Daily conditions record',a:'<button class="btn btn-primary btn-sm" onclick="openAddWeather()">+ Log Today</button>'},
+profile:{t:'My Garden Profile',s:'Setup & season goals',a:''},
+};
+function go(sec){
+S.section=sec;
+document.querySelectorAll('.sb-item').forEach(el=>el.classList.remove('active'));
+document.querySelector(`.sb-item[onclick="go('${sec}')"]`)?.classList.add('active');
+const c=CFG[sec]||CFG.dash;
+document.getElementById('tb-title').textContent=c.t;
+document.getElementById('tb-sub').textContent=c.s;
+document.getElementById('tb-actions').innerHTML=c.a;
+badges();render();
+}
+function badges(){
+document.getElementById('bdg-plants').textContent=S.plants.length;
+document.getElementById('bdg-log').textContent=S.logs.length;
+document.getElementById('bdg-harvest').textContent=S.harvests.length;
+document.getElementById('bdg-pests').textContent=S.pests.length;
+}
+function render(){
+const c=document.getElementById('content');
+const fns={dash:rDash,garden:rGarden,plants:rPlants,calendar:rCalendar,companion:rCompanion,log:rLog,harvest:rHarvest,pests:rPests,budget:rBudget,weather:rWeather,profile:rProfile};
+c.innerHTML=(fns[S.section]||rDash)();
+}
+function rDash(){
+const m=new Date().getMonth();
+const sowNow=S.plants.filter(p=>m>=p.sowS&&m<=p.sowE);
+const harvestNow=S.plants.filter(p=>m>=p.harS&&m<=p.harE);
+const planted=Object.keys(S.garden.cells).length;
+const recentLogs=[...S.logs].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,3);
+const recentH=[...S.harvests].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,4);
+return`
+<div class="stat-grid">
+<div class="stat g"><div class="stat-ico">🌿</div><div class="stat-val">${S.plants.length}</div><div class="stat-lbl">Plant profiles</div></div>
+<div class="stat go"><div class="stat-ico">🗺️</div><div class="stat-val">${planted}</div><div class="stat-lbl">Cells planted</div></div>
+<div class="stat s"><div class="stat-ico">📓</div><div class="stat-val">${S.logs.length}</div><div class="stat-lbl">Journal entries</div></div>
+<div class="stat b"><div class="stat-ico">🥕</div><div class="stat-val">${S.harvests.length}</div><div class="stat-lbl">Harvest records</div></div>
+</div>
+<div class="dash-row wide">
+<div class="card">
+<div class="card-h"><span>📅</span><div class="card-title">${FULL_M[m]} — What to do now</div></div>
+<div class="card-b">
+${sowNow.length?`<p style="font-size:11px;color:var(--brown3);margin-bottom:9px">🌱 <strong>Sow this month:</strong></p><div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px">${sowNow.map(p=>`<span style="background:var(--sage-p);padding:4px 10px;border-radius:14px;font-size:11.5px;color:var(--primary-d)">${p.emoji} ${p.name}</span>`).join('')}</div>`:'<p style="font-size:11.5px;color:var(--brown3)">No sowing scheduled this month.</p>'}
+${harvestNow.length?`<p style="font-size:11px;color:var(--brown3);margin-bottom:8px">🥕 <strong>Ready to harvest:</strong></p><div style="display:flex;flex-wrap:wrap;gap:7px">${harvestNow.map(p=>`<span style="background:var(--gold-p);padding:4px 10px;border-radius:14px;font-size:11.5px;color:var(--brown)">${p.emoji} ${p.name}</span>`).join('')}</div>`:''}
+<div class="tip" style="margin-top:13px"><strong>💡 Tip:</strong> Check the Sow Calendar for full-year planting windows across all your plants.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-h"><span>🗺️</span><div class="card-title">Garden Preview</div></div>
+<div class="card-b">${miniGrid()}<button class="btn btn-ghost btn-sm" onclick="go('garden')" style="width:100%;margin-top:10px">Open full map →</button></div>
+</div>
+</div>
+<div class="dash-row">
+<div class="card">
+<div class="card-h"><span>📓</span><div class="card-title">Recent Journal</div></div>
+<div class="card-b">
+${recentLogs.length?recentLogs.map(l=>`<div style="padding:7px 0;border-bottom:1px solid var(--cream3)"><div style="font-size:10px;color:var(--brown3)">${l.date} ${l.weather||''}</div><div style="font-size:11.5px;color:var(--brown);margin-top:2px">${l.notes?l.notes.substring(0,64)+'…':'(no notes)'}</div></div>`).join(''):'<div class="empty" style="padding:18px"><div style="font-size:22px;opacity:.3">📓</div><div style="font-size:11px;margin-top:5px;color:var(--brown3)">No entries yet</div></div>'}
+<button class="btn btn-ghost btn-sm" onclick="go('log')" style="width:100%;margin-top:10px">View all →</button>
+</div>
+</div>
+<div class="card">
+<div class="card-h"><span>🥕</span><div class="card-title">Recent Harvests</div></div>
+<div class="card-b">
+${recentH.length?`<table class="htable" style="font-size:11px"><tr><th>Date</th><th>Plant</th><th>Qty</th></tr>${recentH.map(h=>`<tr><td>${h.date}</td><td>${S.plants.find(p=>p.name===h.plant)?.emoji||'🌱'} ${h.plant}</td><td>${h.qty} ${h.unit}</td></tr>`).join('')}</table>`:'<div class="empty" style="padding:18px"><div style="font-size:22px;opacity:.3">🥕</div><div style="font-size:11px;margin-top:5px;color:var(--brown3)">No harvests yet</div></div>'}
+<button class="btn btn-ghost btn-sm" onclick="go('harvest')" style="width:100%;margin-top:10px">View all →</button>
+</div>
+</div>
+</div>`;
+}
+function miniGrid(){
+const {rows,cols,cells}=S.garden;
+const size=Math.min(Math.floor(250/cols),26);
+let h=`<div style="display:inline-grid;grid-template-columns:repeat(${cols},${size}px);gap:2px;background:var(--cream3);padding:2px;border-radius:4px">`;
+for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+const k=`${r},${c}`,cell=cells[k];
+if(cell){const p=S.plants.find(x=>x.id===cell.plantId);h+=`<div style="width:${size}px;height:${size}px;background:${p?.color||'var(--sage-p)'};border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:${Math.floor(size*.55)}px">${p?.emoji||'🌱'}</div>`;}
+else h+=`<div style="width:${size}px;height:${size}px;background:var(--cream2);border-radius:2px"></div>`;
+}
+return h+'</div>';
+}
+function rGarden(){
+const {rows,cols,cells}=S.garden;
+let grid=`<div id="g-grid" style="grid-template-columns:repeat(${cols},42px)">`;
+for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+const k=`${r},${c}`,cell=cells[k];
+if(cell){const p=S.plants.find(x=>x.id===cell.plantId);grid+=`<div class="gc filled" onclick="clickCell(${r},${c})" style="background:${p?.color||'var(--sage-p)'}" title="${p?.name||'?'} — click to remove">${p?.emoji||'🌱'}</div>`;}
+else grid+=`<div class="gc empty" onclick="clickCell(${r},${c})" title="Click to plant"></div>`;
+}
+grid+='</div>';
+const used=[...new Set(Object.values(cells).map(c=>c.plantId))];
+const usedP=S.plants.filter(p=>used.includes(p.id));
+return`
+<div class="card" style="margin-bottom:14px">
+<div class="card-h"><span>⚙️</span><div class="card-title">Grid Settings</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<span style="font-size:11px;color:var(--brown3)">Rows:</span>
+<input class="fc" type="number" min="2" max="20" value="${rows}" style="width:48px;padding:4px 7px" onchange="resizeG('rows',this.value)">
+<span style="font-size:11px;color:var(--brown3)">Cols:</span>
+<input class="fc" type="number" min="2" max="20" value="${cols}" style="width:48px;padding:4px 7px" onchange="resizeG('cols',this.value)">
+<span style="font-size:11px;color:var(--brown3);border-left:1px solid var(--cream3);padding-left:10px">Select a plant → click cells to place · click filled to remove</span>
+</div>
+</div>
+</div>
+<div class="garden-wrap">
+<div>
+<div class="card" style="margin-bottom:14px">
+<div class="card-h"><span>🗺️</span><div class="card-title">Layout — ${rows}×${cols}</div><span style="margin-left:auto;font-size:11px;color:var(--brown3)">${Object.keys(cells).length}/${rows*cols} cells</span></div>
+<div class="card-b" style="overflow-x:auto">${grid}</div>
+</div>
+<div class="card">
+<div class="card-h"><span>📊</span><div class="card-title">Coverage</div></div>
+<div class="card-b">
+${usedP.length?usedP.map(p=>{const n=cntP(p.id),pct=Math.round(n/(rows*cols)*100);return`<div style="margin-bottom:9px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span>${p.emoji} ${p.name}</span><span style="color:var(--brown3)">${n} cells (${pct}%)</span></div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:${p.color}"></div></div></div>`;}).join(''):`<p style="font-size:11.5px;color:var(--brown3)">No plants placed yet. Select a plant on the right, then click any cell.</p>`}
+</div>
+</div>
+</div>
+<div>
+<div class="card">
+<div class="card-h"><span>🌱</span><div class="card-title">Select Plant</div></div>
+<div class="card-b" style="padding:10px">
+${S.plants.map(p=>`<div class="legend-item ${S.activePlant===p.id?'sel':''}" onclick="selP('${p.id}')"><div class="legend-dot" style="background:${p.color}"></div>${p.emoji} ${p.name}<span style="margin-left:auto;font-size:10px;color:var(--brown4)">${cntP(p.id)}</span></div>`).join('')}
+</div>
+</div>
+</div>
+</div>`;
+}
+function cntP(id){return Object.values(S.garden.cells).filter(c=>c.plantId===id).length;}
+function selP(id){S.activePlant=S.activePlant===id?null:id;render();}
+function clickCell(r,c){
+const k=`${r},${c}`;
+if(S.garden.cells[k]){delete S.garden.cells[k];}
+else if(S.activePlant){S.garden.cells[k]={plantId:S.activePlant};}
+else{openCellPick(r,c);return;}
+save();render();
+}
+function openCellPick(r,c){
+openM('🌱','Plant this cell',`
+<p style="font-size:11.5px;color:var(--brown3);margin-bottom:11px">Choose a plant for row ${r+1}, col ${c+1}:</p>
+<div class="pp-grid">${S.plants.map(p=>`<div class="pp-item" onclick="placeCell(${r},${c},'${p.id}')"><div class="pp-emo">${p.emoji}</div><div class="pp-name">${p.name}</div></div>`).join('')}</div>
+`,`<button class="btn btn-ghost btn-sm" onclick="closeM()">Cancel</button>`);
+}
+function placeCell(r,c,id){
+S.garden.cells[`${r},${c}`]={plantId:id};
+S.activePlant=id;
+save();closeM();render();toast('Plant placed!');
+}
+function resizeG(dim,v){
+v=Math.min(20,Math.max(2,parseInt(v)||8));
+S.garden[dim==='rows'?'rows':'cols']=v;
+Object.keys(S.garden.cells).forEach(k=>{const[r,c]=k.split(',').map(Number);if(r>=S.garden.rows||c>=S.garden.cols)delete S.garden.cells[k];});
+save();render();
+}
+function clearGarden(){if(confirm('Clear all plants from the map?')){S.garden.cells={};save();render();toast('Garden cleared');}}
+function rPlants(){return`
+<div class="plants-grid">
+${S.plants.map(p=>`
+<div class="plant-card" style="border-top-color:${p.color}" onclick="openEditPlant('${p.id}')">
+<div class="pc-emoji">${p.emoji}</div>
+<div class="pc-name">${p.name}</div>
+<div class="pc-meta">
+${p.spacing?`📐 ${p.spacing} &nbsp;`:''}${p.water?`💧 ${p.water}`:''}${p.sun?` · ☀️ ${p.sun}`:''}
+${p.days?`<br>⏱️ ${p.days} days`:''}
+${p.sowS>=0&&p.sowE>=0?`<br>🌱 Sow ${MONTHS[p.sowS]}–${MONTHS[p.sowE]}`:''}
+${p.harS>=0&&p.harE>=0?` &nbsp;🥕 Harvest ${MONTHS[p.harS]}–${MONTHS[p.harE]}`:''}
+</div>
+${p.comp?.length?`<div class="pc-tags">${p.comp.slice(0,3).map(c=>`<span class="pc-tag">🤝 ${c}</span>`).join('')}</div>`:''}
+</div>`).join('')}
+<div class="plant-card add-card" onclick="openAddPlant()">
+<div style="font-size:28px;opacity:.25">+</div>
+<div style="font-size:12px;color:var(--brown3);margin-top:5px">Add Plant</div>
+</div>
+</div>`;}
+function pForm(p={}){return`
+<div class="fr"><div class="fg"><label class="fl">Plant Name *</label><input class="fc" id="fn" value="${p.name||''}" placeholder="e.g. Tomato"></div>
+<div class="fg"><label class="fl">Emoji</label><input class="fc" id="fe" value="${p.emoji||'🌱'}"></div></div>
+<div class="fr3">
+<div class="fg"><label class="fl">Sow Start (1=Jan)</label><input class="fc" type="number" id="fss" value="${p.sowS!=null?p.sowS+1:''}" min="1" max="12"></div>
+<div class="fg"><label class="fl">Sow End</label><input class="fc" type="number" id="fse" value="${p.sowE!=null?p.sowE+1:''}" min="1" max="12"></div>
+<div class="fg"><label class="fl">Days to Maturity</label><input class="fc" type="number" id="fd" value="${p.days||''}"></div>
+</div>
+<div class="fr3">
+<div class="fg"><label class="fl">Harvest Start</label><input class="fc" type="number" id="fhs" value="${p.harS!=null?p.harS+1:''}" min="1" max="12"></div>
+<div class="fg"><label class="fl">Harvest End</label><input class="fc" type="number" id="fhe" value="${p.harE!=null?p.harE+1:''}" min="1" max="12"></div>
+<div class="fg"><label class="fl">Spacing</label><input class="fc" id="fsp" value="${p.spacing||''}" placeholder="30cm"></div>
+</div>
+<div class="fr">
+<div class="fg"><label class="fl">Water Needs</label><select class="fc" id="fw"><option ${p.water==='Low'?'selected':''}>Low</option><option ${p.water==='Med'||!p.water?'selected':''}>Med</option><option ${p.water==='High'?'selected':''}>High</option></select></div>
+<div class="fg"><label class="fl">Sun</label><select class="fc" id="fsun"><option ${p.sun==='Full'||!p.sun?'selected':''}>Full</option><option ${p.sun==='Part'?'selected':''}>Part</option><option ${p.sun==='Shade'?'selected':''}>Shade</option></select></div>
+</div>
+<div class="fg"><label class="fl">Companion Plants (comma-separated)</label><input class="fc" id="fc_" value="${(p.comp||[]).join(', ')}" placeholder="Basil, Carrot"></div>
+<div class="fg"><label class="fl">Color (hex or css)</label><input class="fc" id="fcol" value="${p.color||'#C8E6C9'}" placeholder="#C8E6C9"></div>
+<div class="fg"><label class="fl">Notes</label><textarea class="fc" id="fnotes">${p.notes||''}</textarea></div>`;}
+function openAddPlant(){openM('🌿','Add Plant Profile',pForm(),`<button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="savePlant()">Save</button>`);}
+function openEditPlant(id){const p=S.plants.find(x=>x.id===id);if(!p)return;openM('🌿',`Edit: ${p.name}`,pForm(p),`<button class="btn btn-danger" onclick="delPlant('${id}')">Delete</button><button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="savePlant('${id}')">Save</button>`);}
+function savePlant(id=null){
+const name=document.getElementById('fn').value.trim();if(!name){alert('Name required');return;}
+const data={
+id:id||`p${Date.now()}`,name,
+emoji:document.getElementById('fe').value||'🌱',
+sowS:(parseInt(document.getElementById('fss').value)||1)-1,
+sowE:(parseInt(document.getElementById('fse').value)||12)-1,
+harS:(parseInt(document.getElementById('fhs').value)||6)-1,
+harE:(parseInt(document.getElementById('fhe').value)||9)-1,
+days:parseInt(document.getElementById('fd').value)||60,
+spacing:document.getElementById('fsp').value,
+water:document.getElementById('fw').value,
+sun:document.getElementById('fsun').value,
+comp:document.getElementById('fc_').value.split(',').map(s=>s.trim()).filter(Boolean),
+color:document.getElementById('fcol').value||'#C8E6C9',
+notes:document.getElementById('fnotes').value,
+};
+if(id){const i=S.plants.findIndex(p=>p.id===id);if(i>=0)S.plants[i]=data;}
+else S.plants.push(data);
+save();closeM();render();toast(id?'Plant updated!':'Plant added!');
+}
+function delPlant(id){
+if(!confirm('Delete this plant?'))return;
+S.plants=S.plants.filter(p=>p.id!==id);
+Object.keys(S.garden.cells).forEach(k=>{if(S.garden.cells[k].plantId===id)delete S.garden.cells[k];});
+save();closeM();render();toast('Plant deleted');
+}
+function rCalendar(){
+const cm=new Date().getMonth();
+const rows=S.plants.map(p=>{
+let cells='';
+for(let m=0;m<12;m++){
+const isCur=m===cm;
+let bars='';
+bars+=`<div style="height:9px;border-radius:4px;width:100%;background:${m>=p.sowS&&m<=p.sowE?'#81C784':'transparent'};margin-bottom:2px"></div>`;
+bars+=`<div style="height:9px;border-radius:4px;width:100%;background:${m>=p.harS&&m<=p.harE?p.color:'transparent'}"></div>`;
+cells+=`<td style="padding:3px;background:${isCur?'rgba(184,136,78,.08)':''};border-bottom:1px solid var(--cream3)">${bars}</td>`;
+}
+return`<tr><td style="padding:5px 14px;border-bottom:1px solid var(--cream3);font-size:11.5px;font-weight:500;white-space:nowrap;background:var(--cream)">${p.emoji} ${p.name}</td>${cells}</tr>`;
+}).join('');
+return`
+<div class="card" style="margin-bottom:12px">
+<div class="card-h">
+<span>📅</span><div class="card-title">Sowing & Harvest Calendar</div>
+<div style="margin-left:auto;display:flex;gap:14px;font-size:11px;color:var(--brown2)">
+<span><span style="display:inline-block;width:12px;height:12px;background:#81C784;border-radius:3px;vertical-align:middle;margin-right:4px"></span>Sow window</span>
+<span><span style="display:inline-block;width:12px;height:12px;background:var(--gold-l);border-radius:3px;vertical-align:middle;margin-right:4px"></span>Harvest window</span>
+<span><span style="display:inline-block;width:12px;height:12px;background:rgba(184,136,78,.15);border-radius:3px;vertical-align:middle;margin-right:4px"></span>Current month</span>
+</div>
+</div>
+<div style="overflow-x:auto">
+<table class="cal-table">
+<thead><tr><th style="text-align:left;padding-left:14px;min-width:110px">Plant</th>${MONTHS.map((mo,i)=>`<th style="${i===cm?'background:rgba(184,136,78,.18)':''}">${mo}</th>`).join('')}</tr></thead>
+<tbody>${rows}</tbody>
+</table>
+</div>
+</div>
+<div class="tip"><strong>💡 How to read:</strong> Green bars = sow window. Colored bars = harvest window. Highlighted column = current month (${FULL_M[cm]}).</div>`;
+}
+function rCompanion(){
+const plants=Object.keys(COMP_MATRIX);
+const legend=`<div style="display:flex;gap:14px;margin-bottom:14px;font-size:11.5px;color:var(--brown2)">
+<span><span style="display:inline-block;width:14px;height:14px;background:#D4ECD4;border:1px solid #aaa;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Good companion</span>
+<span><span style="display:inline-block;width:14px;height:14px;background:#F5D4D4;border:1px solid #aaa;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Bad companion</span>
+<span><span style="display:inline-block;width:14px;height:14px;background:var(--cream2);border:1px solid #aaa;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Neutral / unknown</span>
+</div>`;
+let headers=`<th style="background:var(--primary-d);color:#F8F4EE;padding:7px 10px;font-size:10px;text-align:left;min-width:90px">Plant</th>`;
+plants.forEach(p=>{headers+=`<th style="background:var(--primary-d);color:#F8F4EE;padding:5px 4px;font-size:9.5px;text-align:center;letter-spacing:.5px;writing-mode:vertical-rl;min-width:36px">${p}</th>`;});
+let rows=plants.map(row=>{
+const plant=S.plants.find(p=>p.name===row);
+let cells=plants.map(col=>{
+if(row===col)return`<td style="background:var(--cream3);text-align:center">—</td>`;
+const rel=(COMP_MATRIX[row]||{})[col];
+const bg=rel==='good'?'#D4ECD4':rel==='bad'?'#F5D4D4':'var(--cream2)';
+const sym=rel==='good'?'✓':rel==='bad'?'✗':'·';
+const color=rel==='good'?'#2A6B2A':rel==='bad'?'var(--red)':'var(--brown4)';
+return`<td style="background:${bg};text-align:center;border:1px solid rgba(0,0,0,.05);font-size:13px;color:${color}">${sym}</td>`;
+}).join('');
+return`<tr><td style="padding:5px 10px;font-size:11.5px;font-weight:500;border-bottom:1px solid var(--cream3);white-space:nowrap">${plant?.emoji||''} ${row}</td>${cells}</tr>`;
+}).join('');
+return`
+${legend}
+<div class="card">
+<div class="card-b" style="overflow-x:auto;padding:0">
+<table style="border-collapse:collapse;width:100%"><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>
+</div>
+</div>
+<div class="tip" style="margin-top:12px"><strong>💡 Tip:</strong> Companion planting can deter pests, attract pollinators, and improve flavor. Avoid bad pairings — they can compete for nutrients or attract the same pests.</div>`;
+}
+function rLog(){
+const sorted=[...S.logs].sort((a,b)=>new Date(b.date)-new Date(a.date));
+if(!sorted.length)return`<div class="empty"><div class="empty-ico">📓</div><div class="empty-t">No journal entries yet</div><div class="empty-s">Start logging your weekly garden activities to track progress over time.</div><button class="btn btn-primary" onclick="openAddLog()" style="margin-top:16px">+ Create First Entry</button></div>`;
+return sorted.map(l=>`
+<div class="log-entry">
+<div class="log-head">
+<span>${l.weather||'🌤️'}</span><span>${l.date}</span>
+${l.temp?`<span style="font-size:12px;color:var(--sage-l);margin-left:2px">· ${l.temp}°C</span>`:''}
+<button class="btn btn-xs" style="margin-left:auto;background:rgba(255,255,255,.1);color:#F8F4EE;border:none" onclick="delLog('${l.id}')">✕</button>
+</div>
+<div class="log-body">
+${l.tasks?.length?`<div style="margin-bottom:8px">${l.tasks.map(t=>`<div class="log-task"><input type="checkbox" ${t.done?'checked':''} disabled><span style="${t.done?'text-decoration:line-through;opacity:.5':''}">${t.text}</span></div>`).join('')}</div>`:''}
+${l.notes?`<div class="log-note">${l.notes}</div>`:''}
+</div>
+</div>`).join('');}
+function openAddLog(){
+window._lw='🌤️';window._lt=[];
+openM('📓','New Journal Entry',`
+<div class="fr"><div class="fg"><label class="fl">Date *</label><input class="fc" type="date" id="ld" value="${new Date().toISOString().slice(0,10)}"></div>
+<div class="fg"><label class="fl">Temperature (°C)</label><input class="fc" type="number" id="lt" placeholder="e.g. 18"></div></div>
+<div class="fg"><label class="fl">Weather</label><div style="display:flex;flex-wrap:wrap;gap:5px">${WICONS.map(w=>`<button class="btn btn-ghost btn-sm wpick" onclick="pickW(this,'${w}')" style="font-size:16px;padding:5px 8px">${w}</button>`).join('')}</div></div>
+<div class="fg"><label class="fl">Tasks completed</label><div id="tlist"></div>
+<div style="display:flex;gap:6px;margin-top:6px">
+<input class="fc" id="tinput" placeholder="Add a task…" style="flex:1" onkeydown="if(event.key==='Enter')addTask()">
+<button class="btn btn-ghost btn-sm" onclick="addTask()">+</button>
+</div>
+</div>
+<div class="fg"><label class="fl">Notes & Observations</label><textarea class="fc" id="lnotes" placeholder="What did you see? What did you do?"></textarea></div>
+`,`<button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="saveLog()">Save Entry</button>`);
+}
+function pickW(el,w){document.querySelectorAll('.wpick').forEach(b=>b.style.background='');el.style.background='var(--sage-p)';window._lw=w;}
+function addTask(){
+const inp=document.getElementById('tinput');const t=inp.value.trim();if(!t)return;
+window._lt.push({text:t,done:false});inp.value='';
+document.getElementById('tlist').innerHTML=window._lt.map((t,i)=>`<div style="display:flex;align-items:center;gap:7px;padding:3px 0"><input type="checkbox" onchange="window._lt[${i}].done=this.checked"><span style="font-size:11.5px">${t.text}</span></div>`).join('');
+}
+function saveLog(){
+const date=document.getElementById('ld').value;if(!date){alert('Date required');return;}
+S.logs.push({id:`l${Date.now()}`,date,weather:window._lw||'🌤️',temp:document.getElementById('lt').value,tasks:window._lt||[],notes:document.getElementById('lnotes').value});
+save();closeM();render();toast('Entry saved!');
+}
+function delLog(id){if(!confirm('Delete entry?'))return;S.logs=S.logs.filter(l=>l.id!==id);save();render();}
+function rHarvest(){
+const sorted=[...S.harvests].sort((a,b)=>new Date(b.date)-new Date(a.date));
+const total=S.harvests.reduce((s,h)=>s+(parseFloat(h.qty)||0),0);
+const uniq=[...new Set(S.harvests.map(h=>h.plant))].length;
+return`
+<div class="kpi-row">
+<div class="kpi"><div class="kpi-val" style="color:var(--primary)">${S.harvests.length}</div><div class="kpi-lbl">Total records</div></div>
+<div class="kpi"><div class="kpi-val" style="color:var(--gold)">${uniq}</div><div class="kpi-lbl">Different plants</div></div>
+<div class="kpi"><div class="kpi-val" style="color:var(--primary-d)">${total.toFixed(1)} kg</div><div class="kpi-lbl">Total yield</div></div>
+</div>
+${sorted.length?`<div class="card"><div class="card-b" style="padding:0"><table class="htable">
+<thead><tr><th>Date</th><th>Plant</th><th>Qty</th><th>Unit</th><th>Quality</th><th>Notes</th></tr></thead>
+<tbody>${sorted.map(h=>`<tr><td>${h.date}</td><td>${S.plants.find(p=>p.name===h.plant)?.emoji||'🌱'} ${h.plant}</td><td>${h.qty}</td><td>${h.unit}</td><td>${h.quality?'⭐'.repeat(parseInt(h.quality)):' —'}</td><td style="color:var(--brown3)">${h.notes||'—'}</td></tr>`).join('')}</tbody>
+</table></div></div>`:
+`<div class="empty"><div class="empty-ico">🥕</div><div class="empty-t">No harvests logged</div><div class="empty-s">Record each harvest to track your garden's productivity.</div><button class="btn btn-primary" onclick="openAddHarvest()" style="margin-top:16px">+ Log First Harvest</button></div>`}`;}
+function openAddHarvest(){
+openM('🥕','Log Harvest',`
+<div class="fr"><div class="fg"><label class="fl">Date *</label><input class="fc" type="date" id="hd" value="${new Date().toISOString().slice(0,10)}"></div>
+<div class="fg"><label class="fl">Plant *</label><select class="fc" id="hp">${S.plants.map(p=>`<option>${p.name}</option>`).join('')}</select></div></div>
+<div class="fr"><div class="fg"><label class="fl">Quantity *</label><input class="fc" type="number" id="hq" step="0.1" placeholder="0.5"></div>
+<div class="fg"><label class="fl">Unit</label><select class="fc" id="hu"><option>kg</option><option>g</option><option>bunch</option><option>pieces</option><option>liter</option></select></div></div>
+<div class="fg"><label class="fl">Quality (1–5 ★)</label><select class="fc" id="hql"><option value="">—</option><option value="1">⭐ 1 – Poor</option><option value="2">⭐⭐ 2 – Fair</option><option value="3">⭐⭐⭐ 3 – Good</option><option value="4">⭐⭐⭐⭐ 4 – Very Good</option><option value="5">⭐⭐⭐⭐⭐ 5 – Excellent</option></select></div>
+<div class="fg"><label class="fl">Notes</label><textarea class="fc" id="hn" placeholder="Taste, appearance…"></textarea></div>
+`,`<button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="saveHarvest()">Log Harvest</button>`);
+}
+function saveHarvest(){
+const qty=document.getElementById('hq').value;if(!qty){alert('Quantity required');return;}
+S.harvests.push({id:`h${Date.now()}`,date:document.getElementById('hd').value,plant:document.getElementById('hp').value,qty:parseFloat(qty),unit:document.getElementById('hu').value,quality:document.getElementById('hql').value,notes:document.getElementById('hn').value});
+save();closeM();render();toast('Harvest logged!');
+}
+function rPests(){
+const sorted=[...S.pests].sort((a,b)=>new Date(b.date)-new Date(a.date));
+if(!sorted.length)return`<div class="empty"><div class="empty-ico">🐛</div><div class="empty-t">No observations logged</div><div class="empty-s">Track pest and disease issues to learn which treatments work.</div><button class="btn btn-primary" onclick="openAddPest()" style="margin-top:16px">+ Log Observation</button></div>`;
+return`<div class="card"><div class="card-b" style="padding:0"><table class="htable">
+<thead><tr><th>Date</th><th>Plant</th><th>Issue</th><th>Severity</th><th>Treatment</th><th>Resolved</th></tr></thead>
+<tbody>${sorted.map(p=>`<tr><td>${p.date}</td><td>${p.plant}</td><td>${p.issue}</td><td style="color:${p.sev==='High'?'var(--red)':p.sev==='Med'?'var(--orange)':'var(--primary)'}">${p.sev}</td><td>${p.treatment||'—'}</td><td>${p.resolved?'✅':'❌'}</td></tr>`).join('')}</tbody>
+</table></div></div>`;}
+function openAddPest(){
+openM('🐛','Log Pest / Disease',`
+<div class="fr"><div class="fg"><label class="fl">Date *</label><input class="fc" type="date" id="pd" value="${new Date().toISOString().slice(0,10)}"></div>
+<div class="fg"><label class="fl">Plant affected</label><select class="fc" id="pp">${S.plants.map(p=>`<option>${p.name}</option>`).join('')}</select></div></div>
+<div class="fr"><div class="fg"><label class="fl">Issue / Pest *</label><input class="fc" id="pi" placeholder="e.g. Aphids, Powdery mildew"></div>
+<div class="fg"><label class="fl">Severity</label><select class="fc" id="ps"><option>Low</option><option selected>Med</option><option>High</option></select></div></div>
+<div class="fg"><label class="fl">Treatment Applied</label><input class="fc" id="pt" placeholder="e.g. Neem oil spray, removed by hand"></div>
+<div class="fg"><label class="fl">Notes</label><textarea class="fc" id="pn" placeholder="Symptoms, location, spread…"></textarea></div>
+<label class="cb-wrap"><input type="checkbox" id="pr"><div class="cb-box"></div>Issue resolved</label>
+`,`<button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="savePest()">Save</button>`);
+}
+function savePest(){
+const iss=document.getElementById('pi').value.trim();if(!iss){alert('Issue name required');return;}
+S.pests.push({id:`pest${Date.now()}`,date:document.getElementById('pd').value,plant:document.getElementById('pp').value,issue:iss,sev:document.getElementById('ps').value,treatment:document.getElementById('pt').value,notes:document.getElementById('pn').value,resolved:document.getElementById('pr').checked});
+save();closeM();render();toast('Observation saved!');
+}
+function rBudget(){
+const items=S.budget.items||[];
+const total=items.reduce((s,i)=>s+(parseFloat(i.amount)||0),0);
+const budget=S.budget.total||500;
+const pct=Math.min(100,total/budget*100);
+return`
+<div class="kpi-row">
+<div class="kpi"><div class="kpi-val" style="color:var(--primary)">€${total.toFixed(2)}</div><div class="kpi-lbl">Total spent</div></div>
+<div class="kpi"><div class="kpi-val" style="color:var(--gold)">€${budget.toFixed(2)}</div><div class="kpi-lbl">Season budget</div></div>
+<div class="kpi"><div class="kpi-val" style="color:${total>budget?'var(--red)':'var(--primary-d)'}">€${Math.abs(budget-total).toFixed(2)}</div><div class="kpi-lbl">${total>budget?'Over budget':'Remaining'}</div></div>
+</div>
+<div class="card" style="margin-bottom:16px">
+<div class="card-b">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--brown3);margin-bottom:5px"><span>Budget used</span><span>${Math.round(pct)}%</span></div>
+<div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:${total>budget?'var(--red)':'var(--primary)'}"></div></div>
+<div style="margin-top:10px;display:flex;align-items:center;gap:8px">
+<span style="font-size:11px;color:var(--brown3)">Season budget: €</span>
+<input class="fc" type="number" value="${budget}" style="width:90px" onchange="S.budget.total=parseFloat(this.value)||500;save();render()">
+</div>
+</div>
+</div>
+${items.length?`<div class="card"><div class="card-b" style="padding:0"><table class="htable">
+<thead><tr><th>Date</th><th>Category</th><th>Description</th><th>Amount</th><th></th></tr></thead>
+<tbody>${items.map(i=>`<tr><td>${i.date}</td><td>${i.cat}</td><td>${i.desc}</td><td>€${parseFloat(i.amount).toFixed(2)}</td><td><button class="btn btn-xs btn-danger" onclick="delExp('${i.id}')">✕</button></td></tr>`).join('')}<tr><td colspan="3" style="text-align:right;font-weight:600;padding:8px 11px">Total</td><td colspan="2" style="font-weight:600;padding:8px 11px">€${total.toFixed(2)}</td></tr></tbody>
+</table></div></div>`:
+`<div class="empty"><div class="empty-ico">💰</div><div class="empty-t">No expenses yet</div><button class="btn btn-primary" onclick="openAddExpense()" style="margin-top:14px">+ Add First Expense</button></div>`}`;}
+function openAddExpense(){
+openM('💰','Add Expense',`
+<div class="fr"><div class="fg"><label class="fl">Date *</label><input class="fc" type="date" id="ed" value="${new Date().toISOString().slice(0,10)}"></div>
+<div class="fg"><label class="fl">Amount (€) *</label><input class="fc" type="number" id="ea" step="0.01" placeholder="0.00"></div></div>
+<div class="fg"><label class="fl">Category</label><select class="fc" id="ec"><option>Seeds</option><option>Tools</option><option>Soil & Compost</option><option>Fertilizer</option><option>Pest Control</option><option>Infrastructure</option><option>Plants & Seedlings</option><option>Other</option></select></div>
+<div class="fg"><label class="fl">Description *</label><input class="fc" id="edesc" placeholder="e.g. Tomato seeds × 3 varieties"></div>
+`,`<button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="saveExp()">Add</button>`);
+}
+function saveExp(){
+const a=document.getElementById('ea').value,d=document.getElementById('edesc').value.trim();
+if(!a||!d){alert('Amount and description required');return;}
+S.budget.items=S.budget.items||[];
+S.budget.items.push({id:`exp${Date.now()}`,date:document.getElementById('ed').value,cat:document.getElementById('ec').value,desc:d,amount:parseFloat(a)});
+save();closeM();render();toast('Expense added!');
+}
+function delExp(id){if(!confirm('Delete expense?'))return;S.budget.items=S.budget.items.filter(i=>i.id!==id);save();render();}
+function rWeather(){
+const sorted=[...S.weather].sort((a,b)=>new Date(b.date)-new Date(a.date));
+if(!sorted.length)return`<div class="empty"><div class="empty-ico">🌦️</div><div class="empty-t">No weather records</div><div class="empty-s">Log daily conditions to understand how weather affects your garden.</div><button class="btn btn-primary" onclick="openAddWeather()" style="margin-top:16px">+ Log Weather</button></div>`;
+return`<div class="weather-grid">${sorted.map(w=>`<div class="wcard"><div class="wdate">${w.date}</div><div class="wico">${w.ico||'☀️'}</div>${w.temp?`<div class="wtemp">${w.temp}°C</div>`:''}<div class="wdesc">${w.desc||''}</div>${w.rain?`<div style="font-size:10px;color:var(--primary);margin-top:4px">💧 ${w.rain}mm</div>`:''}</div>`).join('')}</div>`;}
+function openAddWeather(){
+window._wi='☀️';
+openM('🌦️','Log Weather',`
+<div class="fr"><div class="fg"><label class="fl">Date *</label><input class="fc" type="date" id="wd" value="${new Date().toISOString().slice(0,10)}"></div>
+<div class="fg"><label class="fl">Temperature (°C)</label><input class="fc" type="number" id="wt" placeholder="20"></div></div>
+<div class="fg"><label class="fl">Conditions</label><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px">${WICONS.map(w=>`<button class="btn btn-ghost btn-sm wpick2" onclick="pickW2(this,'${w}')" style="font-size:17px;padding:5px 8px">${w}</button>`).join('')}</div></div>
+<div class="fr"><div class="fg"><label class="fl">Rainfall (mm)</label><input class="fc" type="number" id="wr" placeholder="0"></div>
+<div class="fg"><label class="fl">Notes</label><input class="fc" id="wdesc" placeholder="Frost, heatwave…"></div></div>
+`,`<button class="btn btn-ghost" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="saveWeather()">Save</button>`);
+}
+function pickW2(el,w){document.querySelectorAll('.wpick2').forEach(b=>b.style.background='');el.style.background='var(--sage-p)';window._wi=w;}
+function saveWeather(){
+S.weather.push({id:`w${Date.now()}`,date:document.getElementById('wd').value,temp:document.getElementById('wt').value,ico:window._wi||'☀️',rain:document.getElementById('wr').value,desc:document.getElementById('wdesc').value});
+save();closeM();render();toast('Weather logged!');
+}
+function rProfile(){
+const p=S.profile;
+return`
+<div class="profile-banner">
+<div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:5px">My Garden</div>
+<div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#F8F4EE">${p.name||'Your Garden'}</div>
+${p.location?`<div style="color:var(--sage-l);font-size:12.5px;margin-top:4px">📍 ${p.location}</div>`:''}
+</div>
+<div class="psec"><div class="psec-h">🌍 Location & Climate</div><div class="psec-b">
+<div class="fr"><div class="fg"><label class="fl">Your Name</label><input class="fc" id="pn" value="${p.name||''}" placeholder="Your name"></div>
+<div class="fg"><label class="fl">Location</label><input class="fc" id="ploc" value="${p.location||''}" placeholder="City, Country"></div></div>
+<div class="fr3"><div class="fg"><label class="fl">Hardiness Zone</label><input class="fc" id="pz" value="${p.zone||''}" placeholder="e.g. 7b"></div>
+<div class="fg"><label class="fl">Last Frost Date</label><input class="fc" type="date" id="plf" value="${p.lastFrost||''}"></div>
+<div class="fg"><label class="fl">First Frost Date</label><input class="fc" type="date" id="pff" value="${p.firstFrost||''}"></div></div>
+</div></div>
+<div class="psec"><div class="psec-h">📊 Season Stats</div><div class="psec-b">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+<div class="kpi"><div class="kpi-val">${S.plants.length}</div><div class="kpi-lbl">Plant profiles</div></div>
+<div class="kpi"><div class="kpi-val">${S.garden.rows}×${S.garden.cols}</div><div class="kpi-lbl">Garden grid</div></div>
+<div class="kpi"><div class="kpi-val">${S.logs.length}</div><div class="kpi-lbl">Journal entries</div></div>
+<div class="kpi"><div class="kpi-val">${S.harvests.length}</div><div class="kpi-lbl">Harvest records</div></div>
+</div>
+</div></div>
+<div class="psec"><div class="psec-h">📝 Season Notes & Goals</div><div class="psec-b">
+<textarea class="fc" id="pnotes" rows="4" placeholder="Goals, observations, things to try next season…">${p.notes||''}</textarea>
+</div></div>
+<div style="display:flex;gap:10px;margin-top:8px">
+<button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+<button class="btn btn-ghost" onclick="if(confirm('Reset ALL data? This cannot be undone.')){localStorage.removeItem('gpState2');location.reload();}">Reset all data</button>
+</div>`;}
+function saveProfile(){
+S.profile={name:document.getElementById('pn').value,location:document.getElementById('ploc').value,zone:document.getElementById('pz').value,lastFrost:document.getElementById('plf').value,firstFrost:document.getElementById('pff').value,notes:document.getElementById('pnotes').value};
+save();render();toast('Profile saved!');
+}
+function openM(ico,title,body,foot=''){
+document.getElementById('m-ico').textContent=ico;
+document.getElementById('m-title').textContent=title;
+document.getElementById('m-body').innerHTML=body;
+document.getElementById('m-foot').innerHTML=foot;
+document.getElementById('modal-bg').classList.add('open');
+}
+function closeM(){document.getElementById('modal-bg').classList.remove('open');}
+function mbgClick(e){if(e.target===document.getElementById('modal-bg'))closeM();}
+function toggleDataMenu(){
+const dd=document.getElementById('data-dropdown');
+dd.classList.toggle('open');
+if(dd.classList.contains('open')){
+setTimeout(()=>document.addEventListener('click',closeDataMenu,{once:true}),10);
+}
+}
+function closeDataMenu(e){
+const dd=document.getElementById('data-dropdown');
+if(!dd.contains(e?.target))dd.classList.remove('open');
+}
+function exportData(){alert("Export is available in the full version. Get it on Etsy! → etsy.com/shop/StudioBoubou");}
+function importData(){alert("Import is available in the full version. Get it on Etsy! → etsy.com/shop/StudioBoubou");}
+function clearAllData(){
+if(!confirm('Delete ALL your garden data? This cannot be undone.'))return;
+if(!confirm('Are you really sure? All plants, logs, harvests, and settings will be deleted.'))return;
+localStorage.removeItem('gpState2');
+location.reload();
+}
+function mgo(sec){
+if(sec==='more'){
+openM('📋','More Sections',`
+<div style="display:grid;gap:6px">
+${[['calendar','📅','Sow Calendar'],['companion','🤝','Companions'],['pests','🐛','Pest & Disease'],['budget','💰','Budget'],['weather','🌦️','Weather Log'],['profile','👤','My Profile']].map(([k,i,n])=>`<div class="dd-item" onclick="closeM();go('${k}')" style="padding:10px 14px;border:1px solid var(--cream3);border-radius:8px;cursor:pointer">${i} ${n}</div>`).join('')}
+</div>
+<div style="display:flex;gap:8px;margin-top:14px">
+<button class="btn btn-ghost btn-sm" onclick="exportData()" style="flex:1">📤 Export</button>
+<button class="btn btn-ghost btn-sm" onclick="importData()" style="flex:1">📥 Import</button>
+</div>
+`,`<button class="btn btn-ghost" onclick="closeM()">Close</button>`);
+return;
+}
+go(sec);
+document.querySelectorAll('.mnav-item').forEach(el=>el.classList.remove('active'));
+document.querySelector(`.mnav-item[onclick="mgo('${sec}')"]`)?.classList.add('active');
+}
+load();badges();render();</script>
+
+<div id="demo-banner">
+  <span>✨ FREE DEMO — Full version includes 150-page printable planner + this app</span>
+  <a href="https://www.etsy.com/shop/StudioBoubou" target="_blank">Get it on Etsy →</a>
+  <button class="close-btn" onclick="this.parentElement.remove();document.body.style.paddingBottom='0'">&times;</button>
+</div>
+
+<script>
+// Disable right-click context menu
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+// Disable Ctrl+S, Ctrl+U, Ctrl+Shift+I, F12
+document.addEventListener('keydown',function(e){
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&(e.key==='s'||e.key==='S'||e.key==='u'||e.key==='U'))e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='i'||e.key==='J'||e.key==='j'||e.key==='C'||e.key==='c'))e.preventDefault();
+});
+</script>
+</body>
+</html>
